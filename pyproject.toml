@@ -1,31 +1,25 @@
-[build-system]
-requires      = ["setuptools>=61.0.0", "wheel"]
-build-backend = "setuptools.build_meta"
-
-[project]
+[tool.poetry]
 name = "umlnow"
 version = "1.0.0"
 description = "A Command Line Interface for the University of Massachusetts Lowell's NOW Student Dashboard API."
+authors = ["Martin Marwad"]
+license = "LISCENSE"
 readme = "README.md"
-authors = [{ name = "Martin Marwad", email = "Martin_Marwad@cs.uml.edu" }]
-license = { file = "LICENSE" }
-classifiers = [
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-]
-dependencies = [
-    "fire @git+https://github.com/google/python-fire.git",
-    "bs4",
-    "playwright",
-]
-requires-python = ">=3"
 
-[project.optional-dependencies]
-dev = ["black", "bumpver", "isort", "pip-tools", "pytest"]
+[tool.poetry.dependencies]
+python = "^3.12"
+fire = {git = "https://github.com/google/python-fire.git"}
+bs4 = "^0.0.2"
+playwright = "^1.41.2"
+requests = "^2.31.0"
 
-[project.urls]
-Homepage = "https://github.com/MartinMarwad/UML-NOW-CLI"
+[tool.poetry.group.dev.dependencies]
+black = "^24.2.0"
+bumpver = "^2023.1129"
+isort = "^5.13.2"
+pip-tools = "^7.4.0"
+pytest = "^8.0.2"
 
-[project.scripts]
-realpython = "umlnow.__main__:main"
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
