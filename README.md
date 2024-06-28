@@ -1,10 +1,8 @@
-# UML-NOW-CLI
+# UML-NOW-CLI <img src= "https://github.com/UMLCloudComputing/UML-NOW-CLI/assets/136134023/1ee7860e-a24b-40e2-8486-447733bbbcf8" width="100" height="100">
 
-A Command Line Interface for the University of Massachusetts Lowell's NOW Student Dashboard API.
+A Command Line Interface for the University of Massachusetts Lowell's NOW Student Dashboard API. Currently a work in progress.
 
 **By using this, you agree to the terms and conditions set forth in the [University of Massachusetts Lowell API Terms of Service](https://www.uml.edu/api/Static/tos.html).**
-
-Currently a work in progress.
 
 ## Installation
 
@@ -16,8 +14,14 @@ pip3 install git+https://github.com/UMLCloudComputing/UML-NOW-CLI --force-reinst
 
 If you get `error: externally-managed-environment`, then you need to create a virtual environment.
 
-You can create a virtual environment through `python3 -m venv /path/to/venv`
-You can activate a virtual environment through `source /path/to/venv/bin/activate`
+You can create a virtual environment through 
+```
+python3 -m venv /path/to/venv
+```
+You can activate a virtual environment through 
+```
+source /path/to/venv/bin/activate
+```
 
 If you would like to create a shortcut script, copy the `umlnow.sh` file into your user or system bin folder.
 
@@ -210,11 +214,17 @@ To use within your own Python program as a library, simply import the commands.
 
 ```python
 from umlnow import course, Search, API
-
-# todo: add documentation
 ```
 
 ### Course API
+
+Import the Course API with
+
+```python
+from umlnow import course
+```
+
+Function signature:
 ```
 def Course(course, **kwargs):
 ```
@@ -230,13 +240,15 @@ Where course is the course ID as a string `"COMP.1020"` and kwargs are the infor
 If you specify no kwargs, all pieces of information will be returned as a dictionary in this format
 
 ```yaml
-'name': course_name,
-'url': course_url,
-'id': course_id,
-'description': course_description,
-'credits': course_credits,
-'requirements-text': requirements_text,
-'requirements': parsed_requirements,
+{
+    'name': course_name,
+    'url': course_url,
+    'id': course_id,
+    'description': course_description,
+    'credits': course_credits,
+    'requirements-text': requirements_text,
+    'requirements': parsed_requirements,
+}
 ```
 
 Otherwise, only the specified entries will be returned. You can specify specific entries by setting the kwarg value to true. For example, if you wanted to just get the name and the description, you would use
@@ -244,6 +256,8 @@ Otherwise, only the specified entries will be returned. You can specify specific
 
 And this would be returned.
 ```yaml
-'name': course_name,
-'description': course_description,
+{
+    'name': course_name,
+    'description': course_description,
+}
 ```
