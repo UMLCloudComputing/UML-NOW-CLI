@@ -11,8 +11,13 @@ Currently a work in progress.
 Install with pip:
 
 ```
-$ pip3 install git+https://github.com/MartinMarwad/UML-NOW-CLI --force-reinstall
+pip3 install git+https://github.com/UMLCloudComputing/UML-NOW-CLI --force-reinstall
 ```
+
+If you get `error: externally-managed-environment`, then you need to create a virtual environment.
+
+You can create a virtual environment through `python3 -m venv /path/to/venv`
+You can activate a virtual environment through `source /path/to/venv/bin/activate`
 
 If you would like to create a shortcut script, copy the `umlnow.sh` file into your user or system bin folder.
 
@@ -35,7 +40,7 @@ The `course` command expects a **course prefix** combined with a **course number
 - `MATH.2310`
 
 ```
-$ python3 -m umlnow course COMP.1020
+python3 -m umlnow course COMP.1020
 ```
 
 ```
@@ -138,13 +143,13 @@ Provides the ability to query for all courses offered by UML.
 To see all courses offered by UML:
 
 ```bash
-$ python3 -m umlnow search courses
+python3 -m umlnow search courses
 ```
 
 To see all courses offered by a department prefix
 
 ```bash
-$ python3 -m umlnow search courses --departments=COMP
+python3 -m umlnow search courses --departments=COMP
 ```
 
 ##### Using the `--parse` flag
@@ -184,11 +189,11 @@ If you want to access the UML APIs directly, use the following commands. This is
 Query the UML Now API directly.
 
 ```
-$ python3 -m umlnow api search --term=3210 --subjects=COMP
+python3 -m umlnow api search --term=3210 --subjects=COMP
 ```
 
 ```
-$ python3 -m umlnow api search --term=3210 --subjects=COMP --courseTitle=computing
+python3 -m umlnow api search --term=3210 --subjects=COMP --courseTitle=computing
 ```
 
 #### API: Catalog
@@ -196,12 +201,10 @@ $ python3 -m umlnow api search --term=3210 --subjects=COMP --courseTitle=computi
 Query the UML Catalog API directly.
 
 ```
-$ python3 -m umlnow api catalog --pathCollege=SCI --pathDepartment=LCOMPSCI --pathType=undergraduate --SearchType=path
+python3 -m umlnow api catalog --pathCollege=SCI --pathDepartment=LCOMPSCI --pathType=undergraduate --SearchType=path
 ```
 
 ## Library
-
-***Needs Documentation***
 
 To use within your own Python program as a library, simply import the commands.
 
@@ -209,4 +212,38 @@ To use within your own Python program as a library, simply import the commands.
 from umlnow import course, Search, API
 
 # todo: add documentation
+```
+
+### Course API
+```
+def Course(course, **kwargs):
+```
+Where course is the course ID as a string `"COMP.1020"` and kwargs are the information you want to retrieve. The following pieces of information are supported
+- `name` - The name of the course
+- `url` - The UML NOW page for the course
+- `id` - ID of the course
+- `description` - A description of the course 
+- `credits` - The number of credits of the course
+- `requirements-text`
+- `requirements` - Parsed Course Requirements
+
+If you specify no kwargs, all pieces of information will be returned as a dictionary in this format
+
+```yaml
+'name': course_name,
+'url': course_url,
+'id': course_id,
+'description': course_description,
+'credits': course_credits,
+'requirements-text': requirements_text,
+'requirements': parsed_requirements,
+```
+
+Otherwise, only the specified entries will be returned. You can specify specific entries by setting the kwarg value to true. For example, if you wanted to just get the name and the description, you would use
+`Course("COMP.1020", name=True, description=True)`
+
+And this would be returned.
+```yaml
+'name': course_name,
+'description': course_description,
 ```
