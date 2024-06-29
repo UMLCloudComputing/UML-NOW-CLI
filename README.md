@@ -251,8 +251,10 @@ If you specify no kwargs, all pieces of information will be returned as a dictio
 }
 ```
 
-Otherwise, only the specified entries will be returned. You can specify specific entries by setting the kwarg value to true. For example, if you wanted to just get the name and the description, you would use
-`Course("COMP.1020", name=True, description=True)`
+Otherwise, only the specified entries will be returned. You can specify specific entries by setting the kwarg value to true. For example, if you wanted to just get the name and the description, you would call the course function as such:
+```
+Course("COMP.1020", name=True, description=True)
+```
 
 And this would be returned.
 ```yaml
