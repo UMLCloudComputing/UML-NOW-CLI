@@ -3,6 +3,14 @@ from sentence_transformers import SentenceTransformer
 from chromadb.utils import embedding_functions
 import argparse
 
+import sys
+import os
+
+# Add the parent directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from umlnow import *
+
 # Initialize ChromaDB client
 client = chromadb.PersistentClient(path="ChromaDB")
 
