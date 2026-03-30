@@ -233,22 +233,26 @@ def Course(course, **kwargs):
     course_id = get_course_id(response)
     course_credits = get_course_credits(response)
     
+    response = {}
     # Filter results based on kwargs
-    if kwargs.get('name'): return {'name': course_name,}
-    if kwargs.get('url'): return {'url': course_url,}
-    if kwargs.get('id'): return {'id': course_id,}
-    if kwargs.get('description'): return {'description': course_description,}
-    if kwargs.get('credits'): return {'credits': course_credits,}
-    if kwargs.get('requirements_text'): return {'requirements-text': requirements_text,}
-    if kwargs.get('requirements'): return {'requirements': parsed_requirements,}
+    if kwargs.get('name'): response['name'] = course_name
+    if kwargs.get('url'): response['url'] = course_url
+    if kwargs.get('id'): response['id'] = course_id
+    if kwargs.get('description'): response['description'] = course_description
+    if kwargs.get('credits'): response['credits'] = course_credits
+    if kwargs.get('requirements_text'): response['requirements-text'] = requirements_text
+    if kwargs.get('requirements'): response['requirements'] = parsed_requirements
     
     # Otherwise, return all results
-    return {
-        'name': course_name,
-        'url': course_url,
-        'id': course_id,
-        'description': course_description,
-        'credits': course_credits,
-        'requirements-text': requirements_text,
-        'requirements': parsed_requirements,
-    }
+    else:
+      repsonse = {
+          'name': course_name,
+          'url': course_url,
+          'id': course_id,
+          'description': course_description,
+          'credits': course_credits,
+          'requirements-text': requirements_text,
+          'requirements': parsed_requirements,
+      }
+   
+    return response
